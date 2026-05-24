@@ -192,9 +192,9 @@ h3 {
 
 .publication {
   display: grid;
-  grid-template-columns: 132px minmax(0, 1fr);
-  gap: 18px;
-  padding: 22px 0;
+  grid-template-columns: 96px minmax(0, 1fr);
+  gap: 16px;
+  padding: 20px 0;
   border-top: 1px solid var(--line);
 }
 
@@ -222,7 +222,7 @@ h3 {
 
 .pub-media.cmasan img {
   object-fit: contain;
-  padding: 8px;
+  padding: 6px;
 }
 
 .venue {
@@ -392,12 +392,12 @@ footer {
   }
 
   .publication {
-    grid-template-columns: 1fr;
-    gap: 13px;
+    grid-template-columns: 86px minmax(0, 1fr);
+    gap: 12px;
   }
 
   .pub-media {
-    max-width: 320px;
+    max-width: none;
   }
 
   .entry-head {
@@ -407,5 +407,15 @@ footer {
   .entry-head span {
     display: block;
     margin-top: 2px;
+  }
+}
+
+@media (max-width: 430px) {
+  .publication {
+    grid-template-columns: 1fr;
+  }
+
+  .pub-media {
+    width: 96px;
   }
 }
