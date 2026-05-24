@@ -200,12 +200,20 @@ h3 {
 }
 
 .venue {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 10px;
+  align-items: baseline;
   margin-bottom: 5px;
   color: var(--accent);
   font-size: 0.86rem;
   font-weight: 700;
   letter-spacing: 0;
-  text-transform: uppercase;
+}
+
+.acceptance {
+  color: var(--muted);
+  font-weight: 500;
 }
 
 .authors {
