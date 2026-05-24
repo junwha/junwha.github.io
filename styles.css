@@ -164,21 +164,6 @@ h3 {
   letter-spacing: 0;
 }
 
-.interest-list {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 18px;
-}
-
-.interest-list article {
-  padding-left: 14px;
-  border-left: 3px solid var(--accent);
-}
-
-.interest-list p {
-  color: var(--muted);
-}
-
 .publication {
   display: grid;
   grid-template-columns: 150px minmax(0, 1fr);
@@ -346,7 +331,6 @@ footer {
     margin-bottom: 4px;
   }
 
-  .interest-list,
   .publication {
     grid-template-columns: 1fr;
   }
