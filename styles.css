@@ -86,7 +86,6 @@ h1 {
   font-weight: 600;
 }
 
-.focus,
 .location {
   margin-bottom: 7px;
   color: var(--muted);
@@ -95,6 +94,29 @@ h1 {
 
 .focus {
   max-width: 210px;
+  margin: 14px 0 12px;
+  color: var(--muted);
+  font-size: 0.94rem;
+  line-height: 1.45;
+}
+
+.focus p {
+  margin-bottom: 5px;
+  color: var(--ink);
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.focus ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.focus li + li {
+  margin-top: 2px;
 }
 
 .links {
@@ -357,9 +379,12 @@ footer {
   }
 
   .role,
-  .focus,
   .location {
     margin-bottom: 4px;
+  }
+
+  .focus {
+    margin: 8px 0 8px;
   }
 
   .section {
