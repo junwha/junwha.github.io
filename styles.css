@@ -220,6 +220,11 @@ h3 {
   font-weight: 500;
 }
 
+.acceptance strong {
+  color: var(--ink);
+  font-weight: 700;
+}
+
 .authors {
   margin-bottom: 8px;
   color: var(--muted);
