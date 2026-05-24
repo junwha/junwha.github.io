@@ -193,32 +193,26 @@ h3 {
 }
 
 .pub-media {
-  display: grid;
-  place-items: end start;
+  display: block;
   min-height: 112px;
-  padding: 14px;
+  aspect-ratio: 4 / 3;
   overflow: hidden;
   border: 1px solid var(--line);
   border-radius: 8px;
-  color: #fff;
-  font-size: 0.94rem;
-  font-weight: 750;
-  line-height: 1.2;
+  background: #fff;
   box-shadow: 0 12px 24px rgba(28, 31, 36, 0.07);
 }
 
-.pub-media.thg {
-  background:
-    linear-gradient(135deg, rgba(255, 255, 255, 0.2), transparent 40%),
-    repeating-linear-gradient(35deg, rgba(255, 255, 255, 0.12) 0 8px, transparent 8px 18px),
-    linear-gradient(135deg, #276a7a, #9c4a2f);
+.pub-media img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
-.pub-media.cmasan {
-  background:
-    linear-gradient(135deg, rgba(255, 255, 255, 0.18), transparent 36%),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.16) 0 2px, transparent 2px 18px),
-    linear-gradient(135deg, #20463b, #b4872d);
+.pub-media.cmasan img {
+  object-fit: contain;
+  padding: 8px;
 }
 
 .venue {
