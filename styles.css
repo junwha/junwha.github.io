@@ -80,17 +80,21 @@ h1 {
 }
 
 .role {
-  margin-bottom: 10px;
+  margin-bottom: 8px;
   color: var(--ink);
   font-size: 1.02rem;
   font-weight: 600;
 }
 
-.affiliation,
+.focus,
 .location {
   margin-bottom: 7px;
   color: var(--muted);
   line-height: 1.45;
+}
+
+.focus {
+  max-width: 210px;
 }
 
 .links {
@@ -129,7 +133,7 @@ h1 {
 .intro {
   padding: 0 0 30px;
   border-bottom: 1px solid var(--line);
-  font-size: 1.05rem;
+  font-size: 1rem;
 }
 
 .intro p {
@@ -166,9 +170,9 @@ h3 {
 
 .publication {
   display: grid;
-  grid-template-columns: 218px minmax(0, 1fr);
-  gap: 22px;
-  padding: 24px 0;
+  grid-template-columns: 132px minmax(0, 1fr);
+  gap: 18px;
+  padding: 22px 0;
   border-top: 1px solid var(--line);
 }
 
@@ -180,7 +184,7 @@ h3 {
 .pub-media {
   display: block;
   align-self: start;
-  aspect-ratio: 16 / 10;
+  aspect-ratio: 4 / 3;
   overflow: hidden;
   border: 1px solid var(--line-strong);
   border-radius: 4px;
@@ -196,7 +200,7 @@ h3 {
 
 .pub-media.cmasan img {
   object-fit: contain;
-  padding: 10px;
+  padding: 8px;
 }
 
 .venue {
@@ -348,7 +352,7 @@ footer {
   }
 
   .role,
-  .affiliation,
+  .focus,
   .location {
     margin-bottom: 4px;
   }
