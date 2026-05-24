@@ -258,9 +258,15 @@ h3 {
 }
 
 .entry-role {
-  margin-bottom: 7px;
+  margin-bottom: 2px;
   color: var(--accent);
   font-weight: 650;
+}
+
+.entry-meta {
+  margin-bottom: 8px;
+  color: var(--muted);
+  font-size: 0.94rem;
 }
 
 ul {
