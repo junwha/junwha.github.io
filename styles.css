@@ -250,6 +250,17 @@ h3 {
   padding: 6px;
 }
 
+.pub-media.iiswc {
+  display: grid;
+  place-items: center;
+  background: #fff;
+  color: var(--accent);
+  font-size: 1rem;
+  font-weight: 800;
+  line-height: 1.05;
+  text-align: center;
+}
+
 .venue {
   display: flex;
   flex-wrap: wrap;
