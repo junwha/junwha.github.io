@@ -69,7 +69,7 @@ a:hover {
 .portrait {
   display: block;
   width: 180px;
-  aspect-ratio: 1;
+  aspect-ratio: 4 / 5;
   object-fit: cover;
   border: 1px solid var(--line-strong);
   border-radius: 6px;
