@@ -52,7 +52,7 @@ a:hover {
 
 .page {
   display: grid;
-  grid-template-columns: 250px minmax(0, 820px);
+  grid-template-columns: 220px minmax(0, 820px);
   gap: 58px;
   width: min(1120px, calc(100% - 56px));
   margin: 0 auto;
