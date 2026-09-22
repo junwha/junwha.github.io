@@ -285,15 +285,11 @@ h3 {
   letter-spacing: 0;
 }
 
+.author-order,
 .acceptance {
   color: var(--muted);
   font-size: 12px;
-  font-weight: 400;
-}
-
-.acceptance strong {
-  color: var(--muted);
-  font-weight: 400;
+  font-weight: 500;
 }
 
 .authors {
