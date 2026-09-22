@@ -56,9 +56,9 @@ a:focus-visible {
 
 .page {
   display: grid;
-  grid-template-columns: 220px minmax(0, 760px);
+  grid-template-columns: 220px minmax(0, 860px);
   gap: 56px;
-  width: min(1060px, calc(100% - 64px));
+  width: min(1136px, calc(100% - 64px));
   margin: 0 auto;
   padding: 64px 0 44px;
 }
