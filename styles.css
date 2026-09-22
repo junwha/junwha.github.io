@@ -284,7 +284,9 @@ h3 {
 }
 
 .publication:hover .pub-description,
-.publication:hover p:not(.venue):not(.authors) {
+.publication:hover p:not(.venue):not(.authors),
+.publication.is-expanded .pub-description,
+.publication.is-expanded p:not(.venue):not(.authors) {
   display: block;
   animation: pubFadeIn 0.15s ease-out;
 }
