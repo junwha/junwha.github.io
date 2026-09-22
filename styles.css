@@ -298,9 +298,26 @@ h3 {
   font-size: 0.96rem;
 }
 
+.pub-description,
 .publication p:not(.venue):not(.authors) {
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  margin-top: 0;
   margin-bottom: 0;
   color: #383b40;
+  line-height: 1.6;
+  transition: max-height 0.3s ease, opacity 0.25s ease, margin 0.3s ease;
+}
+
+.publication:hover .pub-description,
+.publication:focus-within .pub-description,
+.publication:hover p:not(.venue):not(.authors),
+.publication:focus-within p:not(.venue):not(.authors) {
+  max-height: 250px;
+  opacity: 1;
+  margin-top: 6px;
+  margin-bottom: 4px;
 }
 
 .pub-links {
