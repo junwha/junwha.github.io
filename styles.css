@@ -231,7 +231,7 @@ h3 {
   flex-wrap: wrap;
   gap: 6px 16px;
   align-items: center;
-  margin-bottom: 7px;
+  margin-bottom: 6px;
   color: var(--accent);
   font-size: 0.86rem;
   font-weight: 700;
@@ -257,7 +257,7 @@ h3 {
 }
 
 .authors {
-  margin-bottom: 8px;
+  margin-bottom: 6px;
   color: var(--muted);
   font-size: 0.96rem;
 }
@@ -277,7 +277,7 @@ h3 {
 .publication p:not(.venue):not(.authors) {
   display: none;
   margin-top: 6px;
-  margin-bottom: 0;
+  margin-bottom: 6px;
   color: #383b40;
   line-height: 1.6;
 }
@@ -292,7 +292,7 @@ h3 {
   display: flex;
   flex-wrap: wrap;
   gap: 8px 18px;
-  margin-top: 12px;
+  margin-top: 6px;
 }
 
 .entry {
