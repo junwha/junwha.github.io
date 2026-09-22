@@ -56,9 +56,9 @@ a:focus-visible {
 
 .page {
   display: grid;
-  grid-template-columns: 220px minmax(0, 860px);
+  grid-template-columns: 220px minmax(0, 800px);
   gap: 56px;
-  width: min(1136px, calc(100% - 64px));
+  width: min(1076px, calc(100% - 64px));
   margin: 0 auto;
   padding: 64px 0 44px;
 }
@@ -214,6 +214,7 @@ h3 {
   font-weight: 700;
   line-height: 1.35;
   letter-spacing: 0;
+  text-wrap: balance;
 }
 
 .publication {
