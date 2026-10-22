@@ -1,0 +1,37 @@
+name: Build public CV
+
+on:
+  push:
+    paths:
+      - cv-public.tex
+      - .github/workflows/build-public-cv.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out website
+        uses: actions/checkout@v4
+      - name: Compile original Classic LaTeX layout
+        uses: xu-cheng/latex-action@v4
+        with:
+          root_file: cv-public.tex
+          args: -pdf -interaction=nonstopmode -halt-on-error -file-line-error
+      - name: Replace website CV
+        run: |
+          test -s cv-public.pdf
+          mv cv-public.pdf cv.pdf
+          test "$(pdfinfo cv.pdf | awk '/Pages:/ {print $2}')" = "2"
+      - name: Commit generated PDF
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add cv.pdf
+          if ! git diff --cached --quiet; then
+            git commit -m "Update public CV from sanitized LaTeX source"
+            git push
+          fi
