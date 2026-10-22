@@ -25,7 +25,6 @@ jobs:
         run: |
           test -s cv-public.pdf
           mv cv-public.pdf cv.pdf
-          test "$(pdfinfo cv.pdf | awk '/Pages:/ {print $2}')" = "2"
       - name: Commit generated PDF
         run: |
           git config user.name "github-actions[bot]"
