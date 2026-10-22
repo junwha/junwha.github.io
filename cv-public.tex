@@ -1,0 +1,164 @@
+% Public website CV, derived from October 16, 2026 faculty-contact CV, with ADD duties withheld.
+\providecommand{\CVVariant}{professor}
+\documentclass[11pt,a4paper]{article}
+% Shared semantic API. Templates change rendering, never factual content.
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[margin=0.85in,footskip=0.35in]{geometry}
+\usepackage{mathpazo}
+\usepackage{microtype,enumitem,tabularx,array,xcolor,needspace,fancyhdr}
+\usepackage[colorlinks=true,urlcolor=black,linkcolor=black]{hyperref}
+\input{glyphtounicode}
+\pdfgentounicode=1
+\definecolor{CVAccent}{HTML}{213E50}
+\definecolor{CVMuted}{HTML}{555555}
+\definecolor{CVPlaceholder}{HTML}{785120}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{3pt}
+\setlength{\emergencystretch}{2em}
+\linespread{1.04}
+\raggedbottom
+\setlist[itemize]{leftmargin=1.2em,itemsep=2pt,topsep=3pt,parsep=0pt}
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+\newif\ifCVDraft
+\CVDrafttrue
+\fancyfoot[L]{\footnotesize\color{CVMuted}\CVName\ifCVDraft\enspace|\enspace Draft: TO FILL items remain\fi}
+\fancyfoot[R]{\footnotesize\color{CVMuted}\thepage}
+\newcommand{\CVTodo}[1]{{\color{CVPlaceholder}[TO FILL: #1]}}
+\newcommand{\CVLink}[2]{\href{#1}{#2}}
+\newcommand{\CVSelf}{\textbf{Junwha Hong}}
+\newcommand{\CVHeader}[3]{%
+  {\fontsize{27}{31}\selectfont #1}\par\vspace{3pt}
+  {\small #2\par #3}\par\vspace{6pt}}
+\newcommand{\CVSection}[1]{%
+  \par\addvspace{11pt}\Needspace{5\baselineskip}
+  \phantomsection\addcontentsline{toc}{section}{#1}%
+  {\large\scshape #1}\par\vspace{2pt}\hrule height 0.4pt\vspace{6pt}}
+% Renderer hook: date, primary label, secondary label, descriptive content.
+\newcommand{\CVEntry}[4]{%
+  \par\Needspace{4\baselineskip}
+  \begin{tabularx}{\linewidth}{@{}X>{\raggedleft\arraybackslash}p{1.58in}@{}}
+  \textbf{#2} & {\small #1}\\
+  \end{tabularx}\vspace{-4pt}\par
+  \if\relax\detokenize{#3}\relax\else{\itshape #3}\par\fi
+  #4\par\addvspace{5pt}}
+\newcommand{\CVKeepEntry}[4]{%
+  \par\noindent\begin{minipage}{\linewidth}
+  \setlength{\parskip}{3pt}\CVEntry{#1}{#2}{#3}{#4}
+  \end{minipage}\par}
+\newcommand{\CVEducation}[4]{\CVKeepEntry{#1}{#2}{#3}{#4}}
+\newcommand{\CVExperience}[4]{\CVKeepEntry{#1}{#2}{#3}{#4}}
+\newcommand{\CVLeadership}[4]{\CVKeepEntry{#1}{#2}{#3}{#4}}
+% Publication arguments: stable ID, title, author list, venue/year, status, links.
+\newcommand{\CVPublication}[6]{%
+  \par\addvspace{5pt}\begin{samepage}
+  \begin{list}{[\textnormal{#1}]}{\leftmargin=2em\labelwidth=1.6em\labelsep=.4em\topsep=0pt\parsep=0pt\itemsep=0pt}
+  \item \textbf{#2}\par #3\par
+  \textit{#4}\if\relax\detokenize{#5}\relax\else; \textbf{#5}\fi.\enspace {\small #6}
+  \end{list}\end{samepage}\par}
+\newcommand{\CVAward}[3]{\CVEntry{#1}{#2}{}{#3}}
+\newcommand{\CVParagraph}[2]{\par\Needspace{3\baselineskip}\textbf{#1}\enspace #2\par\addvspace{4pt}}
+\newcommand{\CVSkill}[2]{\CVParagraph{#1}{#2}}
+\newenvironment{CVBullets}{\begin{itemize}}{\end{itemize}}
+
+% Full-width ruled academic layout. Visual references: Weir and Hanyi Xu.
+% Original local implementation; no third-party template code copied.
+\geometry{left=0.75in,right=0.75in}
+\renewcommand{\CVHeader}[3]{%
+  \begin{center}{\fontsize{27}{31}\selectfont\scshape #1}\par\vspace{5pt}
+  {\small #2\par #3}\end{center}\vspace{-2pt}}
+
+\newcommand{\CVName}{Junwha Hong}
+\newcommand{\CVTagline}{Research Officer (First Lieutenant), Republic of Korea Air Force}
+\newcommand{\CVContacts}{%
+  \CVLink{mailto:qbit@unist.ac.kr}{qbit@unist.ac.kr}\enspace\textperiodcentered\enspace
+  \CVLink{https://junwha.github.io/}{junwha.github.io}\enspace\textperiodcentered\enspace
+  \CVLink{https://scholar.google.com/citations?user=IU5VRy8AAAAJ&hl=en}{Google Scholar}\enspace\textperiodcentered\enspace
+  \CVLink{https://github.com/junwha}{GitHub}}
+\hypersetup{pdftitle={Junwha Hong -- Curriculum Vitae},pdfauthor={Junwha Hong}}
+
+\CVDraftfalse
+\begin{document}
+\CVHeader{\CVName}{\textbf{\CVTagline}}{\CVContacts}
+\CVSection{Research Interests}
+Computer Architecture for Emerging Workloads; Heterogeneous/Reconfigurable Computing.
+
+\CVSection{Education}
+\CVEducation{Mar 2020 -- Feb 2024}
+  {Ulsan National Institute of Science and Technology (UNIST)}
+  {B.S. in Computer Science and Engineering, \textbf{summa cum laude}}
+  {GPA: 4.13/4.3 (98.3/100), Ranked 4th out of 296 students}
+
+\CVSection{Publications}
+\CVPublication{1}
+ {\CVLink{https://jongse-park.github.io/files/paper/2026-iiswc-howfar.pdf}{How Far Can PIMs Replace GPUs in Energy-Efficient Multi-Turn Agent Serving?}}
+ {\CVSelf, Guseul Heo, Hyunsu Ye, Jongse Park, Olivia Hsu}
+ {IEEE International Symposium on Workload Characterization (IISWC), 2026}{short paper}
+ {}
+\CVPublication{2}
+ {\CVLink{https://jongse-park.github.io/files/paper/2026-iiswc-sparseimagegen.pdf}{Understanding and Exploiting Diagonal Attention Sparsity in Autoregressive Image Generation}}
+ {Daeun Kim, \CVSelf, Changhun Oh, Yoonsung Kim, Yoonhyeong Lee, Jongse Park}
+ {IEEE International Symposium on Workload Characterization (IISWC), 2026}{}
+ {}
+\CVPublication{3}
+ {\CVLink{https://arxiv.org/abs/2511.04117}{Tortoise and Hare Guidance: Accelerating Diffusion Model Inference with Multirate Integration}}
+ {Yunghee Lee, Byeonghyun Pak, \CVSelf, Hoseong Kim}
+ {Conference on Neural Information Processing Systems (NeurIPS), 2025}{}
+ {}
+\CVPublication{4}
+ {\CVLink{https://ieeexplore.ieee.org/document/11023389/}{CMASan: Custom Memory Allocator-aware Address Sanitizer}}
+ {\CVSelf, Wonil Jang, Mijung Kim, Lei Yu, Yonghwi Kwon, Yuseok Jeon}
+ {IEEE Symposium on Security and Privacy (S\&P), 2025 \textbf{(Acceptance rate: 14.3\%)}}{}
+ {}
+
+\CVSection{Research Experience}
+\CVExperience{May 2025 -- Present}
+ {Independent Research Collaboration}
+ {CMU SysCALL \textperiodcentered\ KAIST CASys}
+ {Advisors: Prof. Olivia Hsu and Prof. Jongse Park.
+  \begin{CVBullets}
+   \item \textbf{GPU--PIM provisioning tradeoff (1st author, IISWC'26):} Characterized six agent workloads and identified fresh-prefill demand and live-session KV capacity as key limits to GPU replacement. Proposed retaining GPU-evicted session KVs on PIM to avoid recomputation.
+   \item \textbf{Research infrastructure:} Extended LLMServingSim for long-context and memory-pressure studies, including a 5.3$\times$ faster analytical communication backend with approximately 2\% error over Astra-Sim. Built a configurable simulator for rapid workload--mapping--hardware design-space exploration.
+   \item \textbf{Sparsity in image generation (2nd author, IISWC'26):} Proposed the spatial-locality hypothesis behind diagonal attention and identified extreme sparsity as the key evaluation regime; contributed to evaluation and writing.
+  \end{CVBullets}}
+\newpage
+\CVExperience{Mar 2024 -- Present}
+ {Agency for Defense Development (ADD)}
+ {Research Officer (First Lieutenant)}
+ {}
+\CVExperience{Dec 2020 -- Nov 2024}
+ {UNIST S2Lab}{Undergraduate Researcher}
+ {Advisor: Prof. Yuseok Jeon.
+  \begin{CVBullets}
+   \item \textbf{CMASan (1st author, IEEE S\&P'25):} Analyzed custom memory allocators across 100+ real-world C/C++ projects and generalized AddressSanitizer false negatives into recurring spatial and temporal patterns.
+   \item Designed the compiler/runtime infrastructure for CMASan using Clang AST analysis, LLVM instrumentation, and allocator-aware runtime support, achieving 1.09$\times$ runtime overhead on average.
+   \item Discovered 19 previously unknown memory bugs, including 7 CVEs, and contributed findings and fixes to projects including PHP, SQLite, MicroPython, libSQL, Google OSS-Fuzz, and AFL++.
+  \end{CVBullets}}
+\CVExperience{Apr 2023 -- May 2023}
+ {University of Virginia}{Visiting Student Researcher}
+ {Advisor: Prof. Yonghwi Kwon.
+  \begin{CVBullets}
+   \item Adapted CMASan to the OSS-Fuzz environment and evaluated it by fuzz-testing NGINX, Apache, gRPC, MySQL, and other applications.
+  \end{CVBullets}}
+
+\CVSection{Honors}
+\CVAward{2022}{Top Prize (Minister of Science and ICT Award)}
+ {Millitech Challenge, Republic of Korea.}
+\CVAward{2022}{National Science \& Technology Scholarship}{}
+\CVAward{2021}{Excellence Prize}
+ {UNIST-POSTECH-KAIST Data Science Competition.}
+
+\CVSection{Technical Skills}
+\CVSkill{Languages:}{C/C++, Python, Rust, Scala}
+\CVSkill{Compilers \& Analysis:}{LLVM/Clang, TVM, ONNX/ONNX Runtime, CodeQL}
+\CVSkill{ML Systems \& Profiling:}{vLLM, SGLang, NVIDIA Nsight}
+\CVSkill{Hardware \& RTL:}{Chisel, Vivado HLS; NVIDIA A100/H100/H200/B300, FPGAs}
+
+\par\addvspace{8pt}
+\phantomsection\addcontentsline{toc}{section}{References}%
+{\large\scshape References}\par\vspace{2pt}\hrule height 0.4pt\vspace{5pt}
+\textit{To be added after confirmation.}
+
+\end{document}
