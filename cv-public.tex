@@ -1,10 +1,13 @@
-% Public website CV, derived from October 16, 2026 faculty-contact CV, with ADD duties withheld.
+% Standalone editable LaTeX CV; compile with pdfLaTeX twice.
+% Variant: homepage; ADD experience bullets: off.
+% Shared entry point. Build with scripts/build_cvs.py for ADD visibility modes.
 \providecommand{\CVVariant}{professor}
 \documentclass[11pt,a4paper]{article}
-% Shared semantic API. Templates change rendering, never factual content.
+
+% Source: templates/core.tex
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
-\usepackage[margin=0.85in,footskip=0.35in]{geometry}
+\usepackage[top=0.85in,bottom=0.67in,left=0.85in,right=0.85in,footskip=0.35in]{geometry}
 \usepackage{mathpazo}
 \usepackage{microtype,enumitem,tabularx,array,xcolor,needspace,fancyhdr}
 \usepackage[colorlinks=true,urlcolor=black,linkcolor=black]{hyperref}
@@ -12,57 +15,84 @@
 \pdfgentounicode=1
 \definecolor{CVAccent}{HTML}{213E50}
 \definecolor{CVMuted}{HTML}{555555}
-\definecolor{CVPlaceholder}{HTML}{785120}
 \setlength{\parindent}{0pt}
-\setlength{\parskip}{3pt}
+\setlength{\parskip}{2.5pt}
 \setlength{\emergencystretch}{2em}
-\linespread{1.04}
+\linespread{1.07}
 \raggedbottom
-\setlist[itemize]{leftmargin=1.2em,itemsep=2pt,topsep=3pt,parsep=0pt}
+% CVBullets sets all list parameters explicitly; scoped changes only affect top space.
 \pagestyle{fancy}
 \fancyhf{}
 \renewcommand{\headrulewidth}{0pt}
-\newif\ifCVDraft
-\CVDrafttrue
-\fancyfoot[L]{\footnotesize\color{CVMuted}\CVName\ifCVDraft\enspace|\enspace Draft: TO FILL items remain\fi}
-\fancyfoot[R]{\footnotesize\color{CVMuted}\thepage}
-\newcommand{\CVTodo}[1]{{\color{CVPlaceholder}[TO FILL: #1]}}
 \newcommand{\CVLink}[2]{\href{#1}{#2}}
 \newcommand{\CVSelf}{\textbf{Junwha Hong}}
-\newcommand{\CVHeader}[3]{%
-  {\fontsize{27}{31}\selectfont #1}\par\vspace{3pt}
-  {\small #2\par #3}\par\vspace{6pt}}
+\fancyfoot[L]{\footnotesize\color{CVMuted}\CVName}
+\fancyfoot[R]{\footnotesize\color{CVMuted}\thepage}
 \newcommand{\CVSection}[1]{%
-  \par\addvspace{11pt}\Needspace{5\baselineskip}
+  \par\addvspace{11pt}\Needspace{3\baselineskip}
   \phantomsection\addcontentsline{toc}{section}{#1}%
   {\large\scshape #1}\par\vspace{2pt}\hrule height 0.4pt\vspace{6pt}}
-% Renderer hook: date, primary label, secondary label, descriptive content.
 \newcommand{\CVEntry}[4]{%
   \par\Needspace{4\baselineskip}
   \begin{tabularx}{\linewidth}{@{}X>{\raggedleft\arraybackslash}p{1.58in}@{}}
   \textbf{#2} & {\small #1}\\
   \end{tabularx}\vspace{-4pt}\par
   \if\relax\detokenize{#3}\relax\else{\itshape #3}\par\fi
-  #4\par\addvspace{5pt}}
+  #4\par}
+% Shared entry block: identical heading/role/body spacing for research and leadership.
+\newlength{\CVEntryGap}
+\setlength{\CVEntryGap}{8pt}
+% Shared compact-item spacing for Honors and Leadership & Teaching.
+\newlength{\CVCompactEntryGap}
+\setlength{\CVCompactEntryGap}{4pt}
+% The bullet indentation and marker are identical in all experience sections.
+\newlength{\CVBulletTopSpace}
+\setlength{\CVBulletTopSpace}{4pt}
+\newlength{\CVRoleBodyGap}
+\setlength{\CVRoleBodyGap}{2pt}
 \newcommand{\CVKeepEntry}[4]{%
-  \par\noindent\begin{minipage}{\linewidth}
-  \setlength{\parskip}{3pt}\CVEntry{#1}{#2}{#3}{#4}
-  \end{minipage}\par}
+  \par\Needspace{4\baselineskip}%
+  \noindent\begin{minipage}{\linewidth}%
+  \setlength{\parskip}{0pt}%
+  \begin{tabularx}{\linewidth}{@{}X>{\raggedleft\arraybackslash}p{1.58in}@{}}
+  \textbf{#2} & {\small #1}\\
+  \end{tabularx}\par\vspace{-3pt}%
+  \if\relax\detokenize{#3}\relax\else{\itshape #3}\par\vspace{\CVRoleBodyGap}\fi
+  #4\par
+  \end{minipage}\par\addvspace{\CVEntryGap}}
+% One compact italicized bullet for all coursework, within Education's entry.
+\newcommand{\CVCoursework}[1]{%
+  \par\begin{itemize}[leftmargin=1.2em,itemsep=0pt,topsep=1pt,parsep=0pt,partopsep=0pt]
+  \item \textit{Relevant Coursework: #1}
+  \end{itemize}}
 \newcommand{\CVEducation}[4]{\CVKeepEntry{#1}{#2}{#3}{#4}}
 \newcommand{\CVExperience}[4]{\CVKeepEntry{#1}{#2}{#3}{#4}}
-\newcommand{\CVLeadership}[4]{\CVKeepEntry{#1}{#2}{#3}{#4}}
-% Publication arguments: stable ID, title, author list, venue/year, status, links.
+% Honors and Leadership are visually compact but use exactly the same
+% entry layout and inter-entry gap. Never override "setlist" here, since
+% it would reset the shared itemize indentation.
+\newcommand{\CVCompactEntry}[4]{%
+  \begingroup
+  \setlength{\CVEntryGap}{\CVCompactEntryGap}%
+  \setlength{\CVBulletTopSpace}{0pt}%
+  \setlength{\CVRoleBodyGap}{0pt}%
+  \CVKeepEntry{#1}{#2}{#3}{#4}%
+  \endgroup}
+\newcommand{\CVLeadership}[4]{\CVCompactEntry{#1}{#2}{#3}{#4}}
 \newcommand{\CVPublication}[6]{%
-  \par\addvspace{5pt}\begin{samepage}
+  \par\addvspace{6pt}\begin{samepage}
   \begin{list}{[\textnormal{#1}]}{\leftmargin=2em\labelwidth=1.6em\labelsep=.4em\topsep=0pt\parsep=0pt\itemsep=0pt}
   \item \textbf{#2}\par #3\par
-  \textit{#4}\if\relax\detokenize{#5}\relax\else; \textbf{#5}\fi.\enspace {\small #6}
+  \textit{#4}\if\relax\detokenize{#5}\relax\else; #5\fi.\enspace {\small #6}
   \end{list}\end{samepage}\par}
-\newcommand{\CVAward}[3]{\CVEntry{#1}{#2}{}{#3}}
-\newcommand{\CVParagraph}[2]{\par\Needspace{3\baselineskip}\textbf{#1}\enspace #2\par\addvspace{4pt}}
-\newcommand{\CVSkill}[2]{\CVParagraph{#1}{#2}}
-\newenvironment{CVBullets}{\begin{itemize}}{\end{itemize}}
+\newcommand{\CVAward}[3]{\CVCompactEntry{#1}{#2}{}{#3}}
+\newcommand{\CVParagraph}[2]{\par\Needspace{\baselineskip}\textbf{#1}\enspace #2\par\addvspace{2pt}}
+\newcommand{\CVSkill}[2]{\par\noindent\textbf{#1}\enspace #2\par}
+\newenvironment{CVBullets}{\begin{itemize}[leftmargin=1.2em,itemsep=7pt,topsep=\CVBulletTopSpace,parsep=0pt,partopsep=0pt]}{\end{itemize}}
+\newif\ifCVDraft
+\CVDraftfalse
 
+
+% Source: templates/classic.tex
 % Full-width ruled academic layout. Visual references: Weir and Hanyi Xu.
 % Original local implementation; no third-party template code copied.
 \geometry{left=0.75in,right=0.75in}
@@ -70,27 +100,40 @@
   \begin{center}{\fontsize{27}{31}\selectfont\scshape #1}\par\vspace{5pt}
   {\small #2\par #3}\end{center}\vspace{-2pt}}
 
+
+% Source: content/profile.tex
 \newcommand{\CVName}{Junwha Hong}
 \newcommand{\CVTagline}{Research Officer (First Lieutenant), Republic of Korea Air Force}
 \newcommand{\CVContacts}{%
-  \CVLink{mailto:qbit@unist.ac.kr}{qbit@unist.ac.kr}\enspace\textperiodcentered\enspace
-  \CVLink{https://junwha.github.io/}{junwha.github.io}\enspace\textperiodcentered\enspace
-  \CVLink{https://scholar.google.com/citations?user=IU5VRy8AAAAJ&hl=en}{Google Scholar}\enspace\textperiodcentered\enspace
-  \CVLink{https://github.com/junwha}{GitHub}}
+ \CVLink{mailto:qbit@unist.ac.kr}{qbit@unist.ac.kr}\enspace\textperiodcentered\enspace
+ \CVLink{https://junwha.github.io/}{junwha.github.io}\enspace\textperiodcentered\enspace
+ \CVLink{https://scholar.google.com/citations?user=IU5VRy8AAAAJ\&hl=en}{Google Scholar}\enspace\textperiodcentered\enspace
+ \CVLink{https://github.com/junwha}{GitHub}}
 \hypersetup{pdftitle={Junwha Hong -- Curriculum Vitae},pdfauthor={Junwha Hong}}
 
-\CVDraftfalse
+\newif\ifCVADDBullets
+\CVADDBulletsfalse
 \begin{document}
 \CVHeader{\CVName}{\textbf{\CVTagline}}{\CVContacts}
-\CVSection{Research Interests}
-Computer Architecture for Emerging Workloads; Heterogeneous/Reconfigurable Computing.
 
+% Source: variants/homepage.tex
+% homepage version of the shared CV. ADD details controlled by build script.
+
+% Source: content/interests.tex
+\CVSection{Research Interests}
+Computer Architecture and Systems for Emerging Workloads; Heterogeneous/Reconfigurable Computing.
+
+
+% Source: content/education.tex
 \CVSection{Education}
 \CVEducation{Mar 2020 -- Feb 2024}
   {Ulsan National Institute of Science and Technology (UNIST)}
   {B.S. in Computer Science and Engineering, \textbf{summa cum laude}}
-  {GPA: 4.13/4.3 (98.3/100), Ranked 4th out of 296 students}
+  {GPA: 4.13/4.3 (98.3/100), Ranked 4th out of 296 students
+   \CVCoursework{Tensor Processor Design for Image Recognition, Building Customized Computers, Parallel Computing, Computer Architecture, Cloud Computing.}}
 
+
+% Source: content/publications.tex
 \CVSection{Publications}
 \CVPublication{1}
  {\CVLink{https://jongse-park.github.io/files/paper/2026-iiswc-howfar.pdf}{How Far Can PIMs Replace GPUs in Energy-Efficient Multi-Turn Agent Serving?}}
@@ -113,17 +156,18 @@ Computer Architecture for Emerging Workloads; Heterogeneous/Reconfigurable Compu
  {IEEE Symposium on Security and Privacy (S\&P), 2025 \textbf{(Acceptance rate: 14.3\%)}}{}
  {}
 
+
+% Source: content/experience.tex
 \CVSection{Research Experience}
 \CVExperience{May 2025 -- Present}
  {Independent Research Collaboration}
  {CMU SysCALL \textperiodcentered\ KAIST CASys}
  {Advisors: Prof. Olivia Hsu and Prof. Jongse Park.
   \begin{CVBullets}
-   \item \textbf{GPU--PIM provisioning tradeoff (1st author, IISWC'26):} Characterized six agent workloads and identified fresh-prefill demand and live-session KV capacity as key limits to GPU replacement. Proposed retaining GPU-evicted session KVs on PIM to avoid recomputation.
-   \item \textbf{Research infrastructure:} Extended LLMServingSim for long-context and memory-pressure studies, including a 5.3$\times$ faster analytical communication backend with approximately 2\% error over Astra-Sim. Built a configurable simulator for rapid workload--mapping--hardware design-space exploration.
-   \item \textbf{Sparsity in image generation (2nd author, IISWC'26):} Proposed the spatial-locality hypothesis behind diagonal attention and identified extreme sparsity as the key evaluation regime; contributed to evaluation and writing.
+   \item Characterized six multi-turn agent workloads and identified \textbf{fresh-prefill demand and live-session KV working sets} as key constraints on GPU-to-PIM replacement. Evaluated how KV-cache eviction and Session-KV residency affect energy--latency tradeoffs.
+   \item Extended LLMServingSim for long-context and memory-pressure studies, including an \textbf{analytical communication backend (5.3$\times$ faster, $\sim$2\% error vs. Astra-Sim)}. Built a configurable simulator for workload--hardware design-space exploration.
+   \item Proposed the \textbf{spatial-locality hypothesis behind diagonal attention} in autoregressive image generation and identified extreme sparsity as a key evaluation regime (2nd author, IISWC'26).
   \end{CVBullets}}
-\newpage
 \CVExperience{Mar 2024 -- Present}
  {Agency for Defense Development (ADD)}
  {Research Officer (First Lieutenant)}
@@ -132,17 +176,13 @@ Computer Architecture for Emerging Workloads; Heterogeneous/Reconfigurable Compu
  {UNIST S2Lab}{Undergraduate Researcher}
  {Advisor: Prof. Yuseok Jeon.
   \begin{CVBullets}
-   \item \textbf{CMASan (1st author, IEEE S\&P'25):} Analyzed custom memory allocators across 100+ real-world C/C++ projects and generalized AddressSanitizer false negatives into recurring spatial and temporal patterns.
-   \item Designed the compiler/runtime infrastructure for CMASan using Clang AST analysis, LLVM instrumentation, and allocator-aware runtime support, achieving 1.09$\times$ runtime overhead on average.
-   \item Discovered 19 previously unknown memory bugs, including 7 CVEs, and contributed findings and fixes to projects including PHP, SQLite, MicroPython, libSQL, Google OSS-Fuzz, and AFL++.
-  \end{CVBullets}}
-\CVExperience{Apr 2023 -- May 2023}
- {University of Virginia}{Visiting Student Researcher}
- {Advisor: Prof. Yonghwi Kwon.
-  \begin{CVBullets}
-   \item Adapted CMASan to the OSS-Fuzz environment and evaluated it by fuzz-testing NGINX, Apache, gRPC, MySQL, and other applications.
+   \item Analyzed custom memory allocators across 100+ real-world C/C++ projects, \textbf{generalized AddressSanitizer false negatives into Arena and Recycler patterns}, and defined CodeQL rules for CMA identification based on common allocator-operation patterns.
+   \item Designed \textbf{Clang/LLVM instrumentation and an allocator-aware ASan runtime} with redzones and per-instance quarantine, preserving allocator semantics at 1.09$\times$ average runtime.
+   \item Refined testing and root-cause analysis methods to target CMA-related execution paths, uncovering \textbf{19 previously unknown memory bugs, including 7 CVEs} (\CVLink{https://nvd.nist.gov/vuln/detail/CVE-2024-11235}{one critical PHP vulnerability}).
   \end{CVBullets}}
 
+
+% Source: content/awards.tex
 \CVSection{Honors}
 \CVAward{2022}{Top Prize (Minister of Science and ICT Award)}
  {Millitech Challenge, Republic of Korea.}
@@ -150,15 +190,28 @@ Computer Architecture for Emerging Workloads; Heterogeneous/Reconfigurable Compu
 \CVAward{2021}{Excellence Prize}
  {UNIST-POSTECH-KAIST Data Science Competition.}
 
-\CVSection{Technical Skills}
-\CVSkill{Languages:}{C/C++, Python, Rust, Scala}
-\CVSkill{Compilers \& Analysis:}{LLVM/Clang, TVM, ONNX/ONNX Runtime, CodeQL}
-\CVSkill{ML Systems \& Profiling:}{vLLM, SGLang, NVIDIA Nsight}
-\CVSkill{Hardware \& RTL:}{Chisel, Vivado HLS; NVIDIA A100/H100/H200/B300, FPGAs}
 
-\par\addvspace{8pt}
-\phantomsection\addcontentsline{toc}{section}{References}%
-{\large\scshape References}\par\vspace{2pt}\hrule height 0.4pt\vspace{5pt}
-\textit{To be added after confirmation.}
+% Source: content/leadership.tex
+\CVSection{Leadership \& Teaching}
+\CVLeadership{Sep 2020 -- Feb 2024}
+ {Hacker's EXciting Academy (HeXA), UNIST}{President (2021)}
+ {\begin{CVBullets}
+  \item Organized technical study groups, guest lectures, and peer-led projects during COVID-19.
+  \end{CVBullets}}
+\CVLeadership{Sep 2021 -- Dec 2022}
+ {Student Council, UNIST}
+ {Design \& Information Team Lead (2022); Student Platform Development TF Lead (2021)}
+ {\begin{CVBullets}
+  \item Built a student-information website to make campus information accessible without social media.
+  \end{CVBullets}}
+\CVLeadership{}{Teaching Assistant / Lecturer}{AI Programming Foundation/I/II (Summer/Fall 2021, Spring/Fall 2022)}{}
+\CVLeadership{}{Instructor}{CSE ABC Camp (Winter 2023/2024), Python Campus (2021), C/Arduino Summer Camp (Summer 2020)}{}
+
+
+% Source: content/skills.tex
+\CVSection{Technical Skills}
+\CVSkill{Programming Languages:}{C/C++, Python, Rust, Scala}
+\CVSkill{Compiler \& Hardware Tools:}{LLVM IR, CuTe, Chisel (Rocket Chip), Vivado HLS, TI C7x}
+
 
 \end{document}
